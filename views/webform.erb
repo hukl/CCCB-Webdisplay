@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Webform</title>
+    <script src="jquery.js" ></script>
+
+  </head>
+
+  <body>
+    <form>
+      <p>
+        <textarea cols="56" rows="20" name="text"></textarea>
+      </p>
+      <p>
+        <input type="submit"></input>
+      </p>
+
+    </form>
+
+
+    <h1>Hellischgait</h1>
+    <form>
+      <input id="intensity" name="intensity" type="range" min="1" max="15" value="9" onchange="intensity_handler.submit()" >
+    </form>
+
+    <script>
+      var intensity_handler = {
+        submit : function() {
+          $.ajax({
+            url : "/intensity",
+            data : "intensity=" + $("#intensity").attr("value"),
+            type : "POST"
+          })
+        }
+      }
+
+      $("textarea").keyup(function(){
+        $.ajax({
+          url : "/update",
+          data : "text=" +  $("textarea").attr("value"),
+          type : "POST"
+        })
+      });
+
+    </script>
+  </body>
+
+</html>
